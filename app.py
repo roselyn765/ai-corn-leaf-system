@@ -76,7 +76,10 @@ st.markdown(
 @st.cache_resource
 def load_model():
 
-    model = tf.keras.models.load_model("MobileNetV2.keras")
+    model = tf.keras.models.load_model(
+        "MobileNetV2.h5",
+        compile=False
+    )
 
     return model
 
@@ -95,19 +98,14 @@ uploaded_file = st.file_uploader(
 # =========================================
 def predict_image(image):
 
-    # Resize image
     image = image.resize((224, 224))
 
-    # Convert image to numpy array
     img_array = np.array(image)
 
-    # Normalize image
     img_array = img_array / 255.0
 
-    # Add batch dimension
     img_array = np.expand_dims(img_array, axis=0)
 
-    # Predict
     prediction = model.predict(img_array)
 
     confidence = float(prediction[0][0])
