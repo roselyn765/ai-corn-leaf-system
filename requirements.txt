@@ -1,7 +1,0 @@
-streamlit
-tensorflow
-numpy
-matplotlib
-pillow
-h5py
-keras
